@@ -51,13 +51,6 @@ def update_posts():
     c = conn.cursor()
 
     for post in data:
-        # Only include［震度x］, where x is above 5.
-        # Extract x
-        intensity = int(post['spoiler_text'][3])
-        if intensity < 5:
-            continue
-        print(f'Found post {post["id"]} with intensity {intensity}.')
-
         c.execute('SELECT * FROM posts WHERE internal_id=?', (post['id'],))
         if c.fetchone() is None:
             print(f'Posting {post["id"]} to Slack.')
