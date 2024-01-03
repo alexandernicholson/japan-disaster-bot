@@ -56,7 +56,7 @@ def update_posts():
             print(f'Posting {post["id"]} to Slack.')
             clean_content = get_post_content(post)
             # Remove the HTML tags from the post content using Markdown.
-            post_to_slack(f'{clean_content} - {post["url"]}')
+            post_to_slack(f'{clean_content} - {post["reblog"]["url"]}')
             c.execute('INSERT INTO posts (internal_id, url, content) VALUES (?, ?, ?)', (post['id'], post['url'], post['content']))
             conn.commit()
 
