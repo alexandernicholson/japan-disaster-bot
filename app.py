@@ -44,7 +44,7 @@ def get_post_content(post):
 @huey.periodic_task(crontab(minute='*'), retries=2, retry_delay=60)
 def update_posts():
     # The posts are in a JSON format and at https://unnerv.jp/api/v1/accounts/1/statuses, so we need to fetch them with requests.
-    r = requests.get('https://unnerv.jp/api/v1/accounts/1/statuses')
+    r = requests.get('https://unnerv.jp/api/v1/accounts/12/statuses')
     data = json.loads(r.text)
 
     conn = sqlite3.connect('posts.db')
@@ -56,7 +56,7 @@ def update_posts():
             print(f'Posting {post["id"]} to Slack.')
             clean_content = get_post_content(post)
             # Remove the HTML tags from the post content using Markdown.
-            post_to_slack(f'{clean_content} - {post["url"]}')
+            #post_to_slack(f'{clean_content} - {post["url"]}')
             c.execute('INSERT INTO posts (internal_id, url, content) VALUES (?, ?, ?)', (post['id'], post['url'], post['content']))
             conn.commit()
 
