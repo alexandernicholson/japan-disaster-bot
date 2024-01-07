@@ -43,7 +43,7 @@ def get_post_content(post):
 @huey.periodic_task(crontab(minute='*'), retries=2, retry_delay=60)
 def update_posts():
     # The posts are in a JSON format and at https://unnerv.jp/api/v1/accounts/1/statuses, so we need to fetch them with requests.
-    r = requests.get('https://unnerv.jp/api/v1/accounts/12/statuses')
+    r = requests.get('https://unnerv.jp/api/v1/accounts/11/statuses')
     data = json.loads(r.text)
 
     conn = sqlite3.connect('posts.db')
