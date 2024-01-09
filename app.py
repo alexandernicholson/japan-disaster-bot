@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from huey import SqliteHuey, crontab
 
 # Use an env variable to store the Slack API token.
-os.environ['SLACK_WEBHOOK_URL'] or 'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXX'
+webhook_url = os.environ['SLACK_WEBHOOK_URL'] or 'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXX'
 
 huey = SqliteHuey(filename='huey.db')
 
